@@ -2,15 +2,19 @@
 {%block content%}
 
 {%if user.is_authenticated %}
-
-<h1> hello world </h1>
+{%if records %}
+<h1>Records... </h1>
+{%for record in records%}
+{{ record }}<br>
+{% endfor %}
+{% endif %}
 {%else%}
 
 <div class="col-md-6 offset-md-3">
 <h1>login </h1>
 <form method="POST" action="{% url 'home'%}">
 	{% csrf_token %}
-	<form>
+	
 
   <div class="mb-3">
   <input type="text" class="form-control" name="username" placeholder="username" required>
@@ -19,7 +23,6 @@
   <input type="password" class="form-control" name="password" placeholder="password" required>
   </div>  
   <button type="submit" class="btn btn-secondary">login</button>
-</form>
 </form>
 </div>
 {% endif %}
